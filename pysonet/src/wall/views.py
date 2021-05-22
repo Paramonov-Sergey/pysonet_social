@@ -24,6 +24,7 @@ class PostView(CreateRetrieveUpdateDestroy):
     serializer_class = PostSerializer
     permission_classes_by_action = {'retrieve': [permissions.AllowAny],
                                     'update': [IsAuthor],
+                                    'partial_update':[IsAuthor],
                                     'destroy': [IsAuthor]}
 
     def perform_create(self, serializer):
