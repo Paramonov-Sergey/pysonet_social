@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Follower
-from pysonet.src.profiles.serializers import UserByFollowerSerializer
+from ..profiles.serializers import UserByFollowerSerializer
 
 
 class ListFollowerSerializer(serializers.ModelSerializer):
@@ -9,5 +9,3 @@ class ListFollowerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Follower
         fields = ('subscriber',)
-
-

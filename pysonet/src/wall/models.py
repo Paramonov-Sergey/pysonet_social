@@ -20,7 +20,6 @@ class Post(models.Model):
     )
 
     def __str__(self):
-        # Post by {self.user} -
         return f'id {self.id}'
 
     def comments_count(self):
