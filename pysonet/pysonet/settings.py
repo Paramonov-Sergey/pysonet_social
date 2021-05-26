@@ -26,7 +26,12 @@ SECRET_KEY = 'django-insecure-bg6uk46_3=n)3e(*pr!f2irqffd_z@w$)yup3n$lf-98w_$p34
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+# SECRET_KEY = os.environ.get("SECRET_KEY")
+#
+# # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = bool(int(os.environ.get("DEBUG", default=1)))
+#
+# ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 # Application definition
 
@@ -83,17 +88,36 @@ WSGI_APPLICATION = 'pysonet.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'pysonet',
+#         'USER': 'pysonet_user',
+#         'PASSWORD': '1234567',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'pysonet',
         'USER': 'pysonet_user',
         'PASSWORD': '1234567',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'HOST': 'pysonet-db',
+        'PORT': '5433',
     }
 }
-
+# DATABASES = {
+#     "default": {
+#         "ENGINE": os.environ.get("POSTGRES_ENGINE", "django.db.backends.sqlite3"),
+#         "NAME": os.environ.get("POSTGRES_DB", os.path.join(BASE_DIR, "db.sqlite3")),
+#         "USER": os.environ.get("POSTGRES_USER", "user"),
+#         "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "password"),
+#         "HOST": os.environ.get("POSTGRES_HOST", "localhost"),
+#         "PORT": os.environ.get("POSTGRES_PORT", "5432"),
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -153,6 +177,10 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer',
     ],
 
+    # 'DEFAULT_PARSER_CLASSES': (
+    #     'rest_framework.parsers.JSONParser',
+    # ),
+
 }
 
 from datetime import timedelta
@@ -200,3 +228,18 @@ CORS_ORIGIN_WHITELIST = [
     "http://localhost:1313",
     "http://localhost:4200",
 ]
+
+
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = ''#логин от gmail
+# EMAIL_HOST_PASSWORD = ''#пароль от gmail
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+
+
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", None)
+EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS", None)
+EMAIL_HOST = os.environ.get("EMAIL_HOST", None)
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", None)
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", None)
+EMAIL_PORT = os.environ.get("EMAIL_PORT", None)

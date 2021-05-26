@@ -3,7 +3,7 @@ from . import views
 
 
 urlpatterns = [
-    path('<int:pk>/',views.FollowerView.as_view()),
+    path('add/<int:pk>/',views.FollowerView.as_view()),
     path('',views.ListFollowerView.as_view()),
 
 ]
